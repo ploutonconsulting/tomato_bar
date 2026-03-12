@@ -9,6 +9,8 @@
 "SettingsView.stopAfterBreak.label" = "휴식 후 중지";
 "SettingsView.showTimerInMenuBar.label" = "메뉴 막대에서 타이머 보기";
 "SettingsView.launchAtLogin.label" = "로그인 후 실행";
+"SettingsView.autoStartEnabled.label" = "자동 시작";
+"SettingsView.autoStartTime.label" = "시작 시간";
 "SoundsView.isWindupEnabled.label" = "Windup";
 "SoundsView.isDingEnabled.label" = "Ding";
 "SoundsView.isTickingEnabled.label" = "Ticking";

@@ -54,6 +54,37 @@ private struct IntervalsView: View {
     }
 }
 
+/// A row of 7 single-letter day buttons, ordered by locale's first weekday.
+/// Each button toggles a bit in the autoStartDays bitmask on the timer.
+private struct DayPickerView: View {
+    @EnvironmentObject var timer: TBTimer
+
+    // Calendar weekday symbols: index 0 = Sunday, ordered Sun–Sat
+    private let symbols = Calendar.current.veryShortWeekdaySymbols
+    // Locale-ordered weekday indices (1-based, matching Calendar.weekday)
+    private var orderedWeekdays: [Int] {
+        let first = Calendar.current.firstWeekday // 1 = Sunday, 2 = Monday, etc.
+        return (0 ..< 7).map { (first - 1 + $0) % 7 + 1 }
+    }
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(orderedWeekdays, id: \.self) { weekday in
+                let bit = 1 << (weekday - 1)
+                let isOn = timer.autoStartDays & bit != 0
+                Button(symbols[weekday - 1]) {
+                    timer.autoStartDays ^= bit
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.mini)
+                .background(isOn ? Color.accentColor.opacity(0.2) : Color.clear)
+                .clipShape(RoundedRectangle(cornerRadius: 4))
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
 private struct SettingsView: View {
     @EnvironmentObject var timer: TBTimer
     @ObservedObject private var launchAtLogin = LaunchAtLogin.observable
@@ -83,6 +114,23 @@ private struct SettingsView: View {
                                        comment: "Launch at login label"))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }.toggleStyle(.switch)
+            Toggle(isOn: $timer.autoStartEnabled) {
+                Text(NSLocalizedString("SettingsView.autoStartEnabled.label",
+                                       comment: "Auto-start label"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }.toggleStyle(.switch)
+            if timer.autoStartEnabled {
+                DayPickerView().environmentObject(timer)
+                DatePicker(
+                    NSLocalizedString("SettingsView.autoStartTime.label",
+                                      comment: "Auto-start time label"),
+                    selection: Binding(
+                        get: { timer.autoStartTime },
+                        set: { timer.autoStartTime = $0 }
+                    ),
+                    displayedComponents: .hourAndMinute
+                )
+            }
             Spacer().frame(minHeight: 0)
         }
         .padding(4)

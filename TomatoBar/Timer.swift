@@ -11,6 +11,12 @@ class TBTimer: ObservableObject {
     @AppStorage("workIntervalsInSet") var workIntervalsInSet = 4
     // This preference is "hidden"
     @AppStorage("overrunTimeLimit") var overrunTimeLimit = -60.0
+    @AppStorage("autoStartEnabled") var autoStartEnabled = false
+    // Minutes since midnight, default 540 = 9:00 AM
+    @AppStorage("autoStartMinutesSinceMidnight") var autoStartMinutesSinceMidnight = 540
+    // Bitmask: bit 0 = Sunday, bit 1 = Monday … bit 6 = Saturday
+    // Default 0b0111110 (62) = Mon–Fri
+    @AppStorage("autoStartDays") var autoStartDays = 0b0111110
 
     private var stateMachine = TBStateMachine(state: .idle)
     public let player = TBPlayer()
@@ -18,8 +24,26 @@ class TBTimer: ObservableObject {
     private var notificationCenter = TBNotificationCenter()
     private var finishTime: Date!
     private var timerFormatter = DateComponentsFormatter()
+    private var autoStartTimer: Timer?
+    private var lastAutoStartDate: Date?
     @Published var timeLeftString: String = ""
     @Published var timer: DispatchSourceTimer?
+
+    /// Converts minutes-since-midnight to/from a Date for
+    /// DatePicker binding in the settings UI.
+    var autoStartTime: Date {
+        get {
+            let hour = autoStartMinutesSinceMidnight / 60
+            let minute = autoStartMinutesSinceMidnight % 60
+            return Calendar.current.date(
+                from: DateComponents(hour: hour, minute: minute)
+            ) ?? Date()
+        }
+        set {
+            let components = Calendar.current.dateComponents([.hour, .minute], from: newValue)
+            autoStartMinutesSinceMidnight = (components.hour ?? 9) * 60 + (components.minute ?? 0)
+        }
+    }
 
     init() {
         /*
@@ -83,6 +107,8 @@ class TBTimer: ObservableObject {
                             andSelector: #selector(handleGetURLEvent(_:withReplyEvent:)),
                             forEventClass: AEEventClass(kInternetEventClass),
                             andEventID: AEEventID(kAEGetURL))
+
+        setupAutoStartScheduler()
     }
 
     @objc func handleGetURLEvent(_ event: NSAppleEventDescriptor,
@@ -225,5 +251,39 @@ class TBTimer: ObservableObject {
         stopTimer()
         TBStatusItem.shared.setIcon(name: .idle)
         consecutiveWorkIntervals = 0
+    }
+
+    /// Configures a repeating timer that checks every 30 seconds
+    /// whether to auto-start a session on weekday mornings.
+    private func setupAutoStartScheduler() {
+        autoStartTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
+            self?.checkAutoStart()
+        }
+    }
+
+    /// Starts a work session if: auto-start is enabled, the timer is
+    /// idle, it's a weekday, the scheduled time has been reached, and
+    /// auto-start hasn't already fired today.
+    private func checkAutoStart() {
+        guard autoStartEnabled else { return }
+        guard stateMachine.state == .idle else { return }
+
+        let now = Date()
+        let calendar = Calendar.current
+        // weekday: 1 = Sunday … 7 = Saturday; bit 0 = Sunday … bit 6 = Saturday
+        let weekday = calendar.component(.weekday, from: now)
+        let dayBit = 1 << (weekday - 1)
+        guard autoStartDays & dayBit != 0 else { return }
+
+        if let last = lastAutoStartDate, calendar.isDate(last, inSameDayAs: now) {
+            return
+        }
+
+        let currentMinutes = calendar.component(.hour, from: now) * 60
+            + calendar.component(.minute, from: now)
+        if currentMinutes >= autoStartMinutesSinceMidnight {
+            lastAutoStartDate = now
+            startStop()
+        }
     }
 }
