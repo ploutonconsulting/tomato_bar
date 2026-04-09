@@ -11,6 +11,8 @@
 "SettingsView.launchAtLogin.label" = "Launch at login";
 "SettingsView.autoStartEnabled.label" = "Auto-start";
 "SettingsView.autoStartTime.label" = "Start time";
+"SettingsView.autoStopEnabled.label" = "Auto-stop";
+"SettingsView.autoStopTime.label" = "Stop time";
 "SoundsView.isWindupEnabled.label" = "Windup";
 "SoundsView.isDingEnabled.label" = "Ding";
 "SoundsView.isTickingEnabled.label" = "Ticking";

@@ -2,6 +2,32 @@ import KeyboardShortcuts
 import SwiftState
 import SwiftUI
 
+/// A pure value type that decides whether a scheduled action (auto-start or
+/// auto-stop) should fire "now". Kept free of `TBTimer` state so the same
+/// rule type can power both schedules and be reasoned about in isolation.
+struct TBScheduleRule {
+    let enabled: Bool
+    /// Scheduled time-of-day expressed as minutes since midnight (0–1439).
+    let minutesSinceMidnight: Int
+    /// Bitmask of allowed weekdays. Bit 0 = Sunday … bit 6 = Saturday,
+    /// matching `Calendar.weekday - 1`.
+    let daysBitmask: Int
+
+    /// Returns true when `now` falls on an allowed weekday and the
+    /// scheduled time-of-day has been reached. The caller is responsible
+    /// for once-per-day deduplication and for any state-based guards
+    /// (e.g. "only start if the timer is idle").
+    func shouldFire(now: Date, calendar: Calendar = .current) -> Bool {
+        guard enabled else { return false }
+        let weekday = calendar.component(.weekday, from: now)
+        let dayBit = 1 << (weekday - 1)
+        guard daysBitmask & dayBit != 0 else { return false }
+        let currentMinutes = calendar.component(.hour, from: now) * 60
+            + calendar.component(.minute, from: now)
+        return currentMinutes >= minutesSinceMidnight
+    }
+}
+
 class TBTimer: ObservableObject {
     @AppStorage("stopAfterBreak") var stopAfterBreak = false
     @AppStorage("showTimerInMenuBar") var showTimerInMenuBar = true
@@ -17,6 +43,11 @@ class TBTimer: ObservableObject {
     // Bitmask: bit 0 = Sunday, bit 1 = Monday … bit 6 = Saturday
     // Default 0b0111110 (62) = Mon–Fri
     @AppStorage("autoStartDays") var autoStartDays = 0b0111110
+    @AppStorage("autoStopEnabled") var autoStopEnabled = false
+    // Minutes since midnight, default 1020 = 5:00 PM
+    @AppStorage("autoStopMinutesSinceMidnight") var autoStopMinutesSinceMidnight = 1020
+    // Same bitmask layout as autoStartDays. Default Mon–Fri.
+    @AppStorage("autoStopDays") var autoStopDays = 0b0111110
 
     private var stateMachine = TBStateMachine(state: .idle)
     public let player = TBPlayer()
@@ -24,25 +55,56 @@ class TBTimer: ObservableObject {
     private var notificationCenter = TBNotificationCenter()
     private var finishTime: Date!
     private var timerFormatter = DateComponentsFormatter()
-    private var autoStartTimer: Timer?
+    private var scheduleTimer: Timer?
     private var lastAutoStartDate: Date?
+    private var lastAutoStopDate: Date?
     @Published var timeLeftString: String = ""
     @Published var timer: DispatchSourceTimer?
 
     /// Converts minutes-since-midnight to/from a Date for
     /// DatePicker binding in the settings UI.
     var autoStartTime: Date {
-        get {
-            let hour = autoStartMinutesSinceMidnight / 60
-            let minute = autoStartMinutesSinceMidnight % 60
-            return Calendar.current.date(
-                from: DateComponents(hour: hour, minute: minute)
-            ) ?? Date()
-        }
-        set {
-            let components = Calendar.current.dateComponents([.hour, .minute], from: newValue)
-            autoStartMinutesSinceMidnight = (components.hour ?? 9) * 60 + (components.minute ?? 0)
-        }
+        get { Self.date(fromMinutes: autoStartMinutesSinceMidnight) }
+        set { autoStartMinutesSinceMidnight = Self.minutes(from: newValue, defaultHour: 9) }
+    }
+
+    /// DatePicker binding for the auto-stop time-of-day.
+    var autoStopTime: Date {
+        get { Self.date(fromMinutes: autoStopMinutesSinceMidnight) }
+        set { autoStopMinutesSinceMidnight = Self.minutes(from: newValue, defaultHour: 17) }
+    }
+
+    private var startRule: TBScheduleRule {
+        TBScheduleRule(
+            enabled: autoStartEnabled,
+            minutesSinceMidnight: autoStartMinutesSinceMidnight,
+            daysBitmask: autoStartDays
+        )
+    }
+
+    private var stopRule: TBScheduleRule {
+        TBScheduleRule(
+            enabled: autoStopEnabled,
+            minutesSinceMidnight: autoStopMinutesSinceMidnight,
+            daysBitmask: autoStopDays
+        )
+    }
+
+    /// Shared conversion from minutes-since-midnight to a `Date` whose
+    /// hour and minute match. Used by both `autoStartTime` and `autoStopTime`.
+    private static func date(fromMinutes minutes: Int) -> Date {
+        let hour = minutes / 60
+        let minute = minutes % 60
+        return Calendar.current.date(
+            from: DateComponents(hour: hour, minute: minute)
+        ) ?? Date()
+    }
+
+    /// Shared conversion from a `Date` to minutes-since-midnight,
+    /// substituting `defaultHour` if the Date has no hour component.
+    private static func minutes(from date: Date, defaultHour: Int) -> Int {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+        return (components.hour ?? defaultHour) * 60 + (components.minute ?? 0)
     }
 
     init() {
@@ -108,7 +170,7 @@ class TBTimer: ObservableObject {
                             forEventClass: AEEventClass(kInternetEventClass),
                             andEventID: AEEventID(kAEGetURL))
 
-        setupAutoStartScheduler()
+        setupScheduler()
     }
 
     @objc func handleGetURLEvent(_ event: NSAppleEventDescriptor,
@@ -254,36 +316,44 @@ class TBTimer: ObservableObject {
     }
 
     /// Configures a repeating timer that checks every 30 seconds
-    /// whether to auto-start a session on weekday mornings.
-    private func setupAutoStartScheduler() {
-        autoStartTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
-            self?.checkAutoStart()
+    /// whether to auto-start or auto-stop a session based on the
+    /// configured schedule rules.
+    private func setupScheduler() {
+        scheduleTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
+            self?.checkSchedule()
         }
     }
 
-    /// Starts a work session if: auto-start is enabled, the timer is
-    /// idle, it's a weekday, the scheduled time has been reached, and
-    /// auto-start hasn't already fired today.
-    private func checkAutoStart() {
-        guard autoStartEnabled else { return }
-        guard stateMachine.state == .idle else { return }
-
+    /// Consults `startRule` and `stopRule`, firing once per day each.
+    /// Start: only when idle; stop: only when not idle, but the "fired today"
+    /// flag is set as soon as the stop time has passed so that a later
+    /// manual start isn't surprise-stopped on the same day.
+    private func checkSchedule() {
         let now = Date()
         let calendar = Calendar.current
-        // weekday: 1 = Sunday … 7 = Saturday; bit 0 = Sunday … bit 6 = Saturday
-        let weekday = calendar.component(.weekday, from: now)
-        let dayBit = 1 << (weekday - 1)
-        guard autoStartDays & dayBit != 0 else { return }
 
-        if let last = lastAutoStartDate, calendar.isDate(last, inSameDayAs: now) {
-            return
-        }
-
-        let currentMinutes = calendar.component(.hour, from: now) * 60
-            + calendar.component(.minute, from: now)
-        if currentMinutes >= autoStartMinutesSinceMidnight {
+        // Auto-start: once per day, only while idle.
+        if !isSameDayAsNow(lastAutoStartDate, calendar: calendar, now: now),
+           stateMachine.state == .idle,
+           startRule.shouldFire(now: now, calendar: calendar) {
             lastAutoStartDate = now
             startStop()
         }
+
+        // Auto-stop: once per day. Record the "fired today" flag as soon as
+        // the scheduled moment passes, even if nothing was running, so that
+        // a later manual start isn't stopped again later the same day.
+        if !isSameDayAsNow(lastAutoStopDate, calendar: calendar, now: now),
+           stopRule.shouldFire(now: now, calendar: calendar) {
+            lastAutoStopDate = now
+            if stateMachine.state != .idle {
+                startStop()
+            }
+        }
+    }
+
+    private func isSameDayAsNow(_ date: Date?, calendar: Calendar, now: Date) -> Bool {
+        guard let date else { return false }
+        return calendar.isDate(date, inSameDayAs: now)
     }
 }
