@@ -55,9 +55,10 @@ private struct IntervalsView: View {
 }
 
 /// A row of 7 single-letter day buttons, ordered by locale's first weekday.
-/// Each button toggles a bit in the autoStartDays bitmask on the timer.
+/// Each button toggles a bit in the bound `Int` bitmask (bit 0 = Sunday,
+/// bit 6 = Saturday). Used for both the auto-start and auto-stop day pickers.
 private struct DayPickerView: View {
-    @EnvironmentObject var timer: TBTimer
+    @Binding var days: Int
 
     // Calendar weekday symbols: index 0 = Sunday, ordered Sun–Sat
     private let symbols = Calendar.current.veryShortWeekdaySymbols
@@ -71,9 +72,9 @@ private struct DayPickerView: View {
         HStack(spacing: 4) {
             ForEach(orderedWeekdays, id: \.self) { weekday in
                 let bit = 1 << (weekday - 1)
-                let isOn = timer.autoStartDays & bit != 0
+                let isOn = days & bit != 0
                 Button(symbols[weekday - 1]) {
-                    timer.autoStartDays ^= bit
+                    days ^= bit
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.mini)
@@ -120,7 +121,7 @@ private struct SettingsView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }.toggleStyle(.switch)
             if timer.autoStartEnabled {
-                DayPickerView().environmentObject(timer)
+                DayPickerView(days: $timer.autoStartDays)
                 DatePicker(
                     NSLocalizedString("SettingsView.autoStartTime.label",
                                       comment: "Auto-start time label"),
@@ -130,6 +131,49 @@ private struct SettingsView: View {
                     ),
                     displayedComponents: .hourAndMinute
                 )
+            }
+            Toggle(isOn: $timer.autoStopEnabled) {
+                Text(NSLocalizedString("SettingsView.autoStopEnabled.label",
+                                       comment: "Auto-stop label"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }.toggleStyle(.switch)
+            if timer.autoStopEnabled {
+                DayPickerView(days: $timer.autoStopDays)
+                DatePicker(
+                    NSLocalizedString("SettingsView.autoStopTime.label",
+                                      comment: "Auto-stop time label"),
+                    selection: Binding(
+                        get: { timer.autoStopTime },
+                        set: { timer.autoStopTime = $0 }
+                    ),
+                    displayedComponents: .hourAndMinute
+                )
+            }
+            Toggle(isOn: $timer.lunchPauseEnabled) {
+                Text(NSLocalizedString("SettingsView.lunchPauseEnabled.label",
+                                       comment: "Pause for lunch label"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }.toggleStyle(.switch)
+            if timer.lunchPauseEnabled {
+                DatePicker(
+                    NSLocalizedString("SettingsView.lunchStartTime.label",
+                                      comment: "Lunch start time label"),
+                    selection: Binding(
+                        get: { timer.lunchStartTime },
+                        set: { timer.lunchStartTime = $0 }
+                    ),
+                    displayedComponents: .hourAndMinute
+                )
+                Stepper(value: $timer.lunchDurationMinutes, in: 15 ... 180, step: 5) {
+                    HStack {
+                        Text(NSLocalizedString("SettingsView.lunchDuration.label",
+                                               comment: "Lunch duration label"))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Text(String.localizedStringWithFormat(
+                            NSLocalizedString("IntervalsView.min", comment: "min"),
+                            timer.lunchDurationMinutes))
+                    }
+                }
             }
             Spacer().frame(minHeight: 0)
         }

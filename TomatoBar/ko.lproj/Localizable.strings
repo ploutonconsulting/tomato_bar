@@ -11,6 +11,11 @@
 "SettingsView.launchAtLogin.label" = "로그인 후 실행";
 "SettingsView.autoStartEnabled.label" = "자동 시작";
 "SettingsView.autoStartTime.label" = "시작 시간";
+"SettingsView.autoStopEnabled.label" = "자동 중지";
+"SettingsView.autoStopTime.label" = "중지 시간";
+"SettingsView.lunchPauseEnabled.label" = "점심 일시정지";
+"SettingsView.lunchStartTime.label" = "점심 시작";
+"SettingsView.lunchDuration.label" = "점심 시간:";
 "SoundsView.isWindupEnabled.label" = "Windup";
 "SoundsView.isDingEnabled.label" = "Ding";
 "SoundsView.isTickingEnabled.label" = "Ticking";
