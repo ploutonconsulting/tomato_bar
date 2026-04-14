@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,10 +17,10 @@
 		0C74436B2F8E696B004A4A5F /* PROJECT.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C7443602F8E696B004A4A5F /* PROJECT.md */; };
 		0C74436C2F8E696B004A4A5F /* app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C7443572F8E696B004A4A5F /* app.json */; };
 		0C74436D2F8E696B004A4A5F /* DECISIONS.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C74435C2F8E696B004A4A5F /* DECISIONS.md */; };
+		0C74437D2F8E7D5C004A4A5F /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 0C74437C2F8E7D5C004A4A5F /* LaunchAtLogin */; };
 		8A21B78C27EE31A20009E5DB /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78B27EE31A20009E5DB /* App.swift */; };
 		8A21B78E27EE31A20009E5DB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78D27EE31A20009E5DB /* View.swift */; };
 		8A21B79027EE31A30009E5DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A21B78F27EE31A30009E5DB /* Assets.xcassets */; };
-		8A7403A027FA19BB00E7F90B /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 8A74039F27FA19BB00E7F90B /* LaunchAtLogin */; };
 		8A8CFE402821D8C300F9F303 /* SwiftState in Frameworks */ = {isa = PBXBuildFile; productRef = 8A8CFE3F2821D8C300F9F303 /* SwiftState */; };
 		8A9F700927EE396E0012A1EC /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9F700827EE396E0012A1EC /* State.swift */; };
 		8A9F701927EE3DAF0012A1EC /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9F701827EE3DAF0012A1EC /* Timer.swift */; };
@@ -30,6 +30,16 @@
 		8AA5B3F22812A74600BE1A6C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5B3F12812A74600BE1A6C /* Notifications.swift */; };
 		8AEE49AF2AA75A5E00243D2F /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEE49AE2AA75A5E00243D2F /* Log.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0C7443762F8E784A004A4A5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A21B78027EE31A20009E5DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A21B78727EE31A20009E5DB;
+			remoteInfo = TomatoBar;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0C7443572F8E696B004A4A5F /* app.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = app.json; sourceTree = "<group>"; };
@@ -42,6 +52,7 @@
 		0C7443602F8E696B004A4A5F /* PROJECT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PROJECT.md; sourceTree = "<group>"; };
 		0C7443612F8E696B004A4A5F /* TOOLS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TOOLS.md; sourceTree = "<group>"; };
 		0C7443622F8E696B004A4A5F /* UI-DESIGN.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "UI-DESIGN.md"; sourceTree = "<group>"; };
+		0C7443722F8E784A004A4A5F /* TomatoBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomatoBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC11A472B6A28500012E8EC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8A21B78827EE31A20009E5DB /* TomatoBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomatoBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A21B78B27EE31A20009E5DB /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -57,12 +68,23 @@
 		C4C8DE0E2930DBB4003B1110 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0C7443732F8E784A004A4A5F /* TomatoBarTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TomatoBarTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		0C74436F2F8E784A004A4A5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A21B78527EE31A20009E5DB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A7403A027FA19BB00E7F90B /* LaunchAtLogin in Frameworks */,
+				0C74437D2F8E7D5C004A4A5F /* LaunchAtLogin in Frameworks */,
 				8AA5B3EB281295DB00BE1A6C /* KeyboardShortcuts in Frameworks */,
 				8A8CFE402821D8C300F9F303 /* SwiftState in Frameworks */,
 			);
@@ -141,6 +163,7 @@
 			children = (
 				0C7443532F8E5DAA004A4A5F /* Documents */,
 				8A21B78A27EE31A20009E5DB /* TomatoBar */,
+				0C7443732F8E784A004A4A5F /* TomatoBarTests */,
 				8A21B78927EE31A20009E5DB /* Products */,
 				8A9F700D27EE3AED0012A1EC /* Frameworks */,
 			);
@@ -150,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				8A21B78827EE31A20009E5DB /* TomatoBar.app */,
+				0C7443722F8E784A004A4A5F /* TomatoBarTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -181,6 +205,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0C7443712F8E784A004A4A5F /* TomatoBarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C7443782F8E784A004A4A5F /* Build configuration list for PBXNativeTarget "TomatoBarTests" */;
+			buildPhases = (
+				0C74436E2F8E784A004A4A5F /* Sources */,
+				0C74436F2F8E784A004A4A5F /* Frameworks */,
+				0C7443702F8E784A004A4A5F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0C7443772F8E784A004A4A5F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0C7443732F8E784A004A4A5F /* TomatoBarTests */,
+			);
+			name = TomatoBarTests;
+			packageProductDependencies = (
+			);
+			productName = TomatoBarTests;
+			productReference = 0C7443722F8E784A004A4A5F /* TomatoBarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8A21B78727EE31A20009E5DB /* TomatoBar */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A21B79727EE31A30009E5DB /* Build configuration list for PBXNativeTarget "TomatoBar" */;
@@ -188,7 +235,6 @@
 				8A21B78427EE31A20009E5DB /* Sources */,
 				8A21B78527EE31A20009E5DB /* Frameworks */,
 				8A21B78627EE31A20009E5DB /* Resources */,
-				8A7403A127FA1A4E00E7F90B /* Copy “Launch at Login Helper” */,
 			);
 			buildRules = (
 			);
@@ -196,9 +242,9 @@
 			);
 			name = TomatoBar;
 			packageProductDependencies = (
-				8A74039F27FA19BB00E7F90B /* LaunchAtLogin */,
 				8AA5B3EA281295DB00BE1A6C /* KeyboardShortcuts */,
 				8A8CFE3F2821D8C300F9F303 /* SwiftState */,
+				0C74437C2F8E7D5C004A4A5F /* LaunchAtLogin */,
 			);
 			productName = TomatoBar;
 			productReference = 8A21B78827EE31A20009E5DB /* TomatoBar.app */;
@@ -211,9 +257,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 2640;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					0C7443712F8E784A004A4A5F = {
+						CreatedOnToolsVersion = 26.4;
+						TestTargetID = 8A21B78727EE31A20009E5DB;
+					};
 					8A21B78727EE31A20009E5DB = {
 						CreatedOnToolsVersion = 13.3;
 					};
@@ -231,20 +281,28 @@
 			);
 			mainGroup = 8A21B77F27EE31A20009E5DB;
 			packageReferences = (
-				8A74039E27FA19BB00E7F90B /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 				8AA5B3E9281295DB00BE1A6C /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 				8A8CFE3E2821D8C300F9F303 /* XCRemoteSwiftPackageReference "SwiftState" */,
+				0C74437B2F8E7D5C004A4A5F /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 			);
 			productRefGroup = 8A21B78927EE31A20009E5DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				8A21B78727EE31A20009E5DB /* TomatoBar */,
+				0C7443712F8E784A004A4A5F /* TomatoBarTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0C7443702F8E784A004A4A5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A21B78627EE31A20009E5DB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,29 +324,14 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		8A7403A127FA1A4E00E7F90B /* Copy “Launch at Login Helper” */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
+/* Begin PBXSourcesBuildPhase section */
+		0C74436E2F8E784A004A4A5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy “Launch at Login Helper”";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
 		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
 		8A21B78427EE31A20009E5DB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -305,6 +348,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0C7443772F8E784A004A4A5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A21B78727EE31A20009E5DB /* TomatoBar */;
+			targetProxy = 0C7443762F8E784A004A4A5F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		8AA54347293094AB002A47FC /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -319,6 +370,59 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0C7443792F8E784A004A4A5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7X2XV24BPN;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ploutonconsulting.TomatoBarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TomatoBar.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TomatoBar";
+			};
+			name = Debug;
+		};
+		0C74437A2F8E784A004A4A5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7X2XV24BPN;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ploutonconsulting.TomatoBarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TomatoBar.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TomatoBar";
+			};
+			name = Release;
+		};
 		8A21B79527EE31A30009E5DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -455,12 +559,12 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Tiny Tomato Bar";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Ilya Voronin, 2026 Pierre Oosthuizen. MIT License. https://github.com/ivoronin/TomatoBar";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Ilya Voronin, 2026 Plouton Consulting (Pty) Ltd. MIT License. https://github.com/ivoronin/TomatoBar";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ploutonconsulting.veridian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -492,12 +596,12 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Tiny Tomato Bar";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Ilya Voronin, 2026 Pierre Oosthuizen. MIT License. https://github.com/ivoronin/TomatoBar";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Ilya Voronin, 2026 Plouton Consulting (Pty) Ltd. MIT License. https://github.com/ivoronin/TomatoBar";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ploutonconsulting.veridian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -513,6 +617,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0C7443782F8E784A004A4A5F /* Build configuration list for PBXNativeTarget "TomatoBarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C7443792F8E784A004A4A5F /* Debug */,
+				0C74437A2F8E784A004A4A5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8A21B78327EE31A20009E5DB /* Build configuration list for PBXProject "TomatoBar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -534,12 +647,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8A74039E27FA19BB00E7F90B /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+		0C74437B2F8E7D5C004A4A5F /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
 			requirement = {
-				kind = exactVersion;
-				version = 5.0.2;
+				branch = main;
+				kind = branch;
 			};
 		};
 		8A8CFE3E2821D8C300F9F303 /* XCRemoteSwiftPackageReference "SwiftState" */ = {
@@ -561,9 +674,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8A74039F27FA19BB00E7F90B /* LaunchAtLogin */ = {
+		0C74437C2F8E7D5C004A4A5F /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8A74039E27FA19BB00E7F90B /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			package = 0C74437B2F8E7D5C004A4A5F /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
 			productName = LaunchAtLogin;
 		};
 		8A8CFE3F2821D8C300F9F303 /* SwiftState */ = {

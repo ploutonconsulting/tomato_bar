@@ -88,8 +88,6 @@ private struct DayPickerView: View {
 
 private struct SettingsView: View {
     @EnvironmentObject var timer: TBTimer
-    @ObservedObject private var launchAtLogin = LaunchAtLogin.observable
-
     var body: some View {
         VStack {
             KeyboardShortcuts.Recorder(for: .startStopTimer) {
@@ -110,7 +108,7 @@ private struct SettingsView: View {
                 .onChange(of: timer.showTimerInMenuBar) { _ in
                     timer.updateTimeLeft()
                 }
-            Toggle(isOn: $launchAtLogin.isEnabled) {
+            LaunchAtLogin.Toggle {
                 Text(NSLocalizedString("SettingsView.launchAtLogin.label",
                                        comment: "Launch at login label"))
                     .frame(maxWidth: .infinity, alignment: .leading)
