@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C7443642F8E696B004A4A5F /* UI-DESIGN.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C7443622F8E696B004A4A5F /* UI-DESIGN.md */; };
+		0C7443652F8E696B004A4A5F /* ARCHITECTURE.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C74435B2F8E696B004A4A5F /* ARCHITECTURE.md */; };
+		0C7443662F8E696B004A4A5F /* TOOLS.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C7443612F8E696B004A4A5F /* TOOLS.md */; };
+		0C7443672F8E696B004A4A5F /* workspace.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C7443582F8E696B004A4A5F /* workspace.json */; };
+		0C7443682F8E696B004A4A5F /* LEGAL.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C74435E2F8E696B004A4A5F /* LEGAL.md */; };
+		0C7443692F8E696B004A4A5F /* LOGGING.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C74435F2F8E696B004A4A5F /* LOGGING.md */; };
+		0C74436A2F8E696B004A4A5F /* DOMAIN.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C74435D2F8E696B004A4A5F /* DOMAIN.md */; };
+		0C74436B2F8E696B004A4A5F /* PROJECT.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C7443602F8E696B004A4A5F /* PROJECT.md */; };
+		0C74436C2F8E696B004A4A5F /* app.json in Resources */ = {isa = PBXBuildFile; fileRef = 0C7443572F8E696B004A4A5F /* app.json */; };
+		0C74436D2F8E696B004A4A5F /* DECISIONS.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C74435C2F8E696B004A4A5F /* DECISIONS.md */; };
 		8A21B78C27EE31A20009E5DB /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78B27EE31A20009E5DB /* App.swift */; };
 		8A21B78E27EE31A20009E5DB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78D27EE31A20009E5DB /* View.swift */; };
 		8A21B79027EE31A30009E5DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A21B78F27EE31A30009E5DB /* Assets.xcassets */; };
@@ -22,6 +32,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C7443572F8E696B004A4A5F /* app.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = app.json; sourceTree = "<group>"; };
+		0C7443582F8E696B004A4A5F /* workspace.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = workspace.json; sourceTree = "<group>"; };
+		0C74435B2F8E696B004A4A5F /* ARCHITECTURE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ARCHITECTURE.md; sourceTree = "<group>"; };
+		0C74435C2F8E696B004A4A5F /* DECISIONS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DECISIONS.md; sourceTree = "<group>"; };
+		0C74435D2F8E696B004A4A5F /* DOMAIN.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DOMAIN.md; sourceTree = "<group>"; };
+		0C74435E2F8E696B004A4A5F /* LEGAL.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LEGAL.md; sourceTree = "<group>"; };
+		0C74435F2F8E696B004A4A5F /* LOGGING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LOGGING.md; sourceTree = "<group>"; };
+		0C7443602F8E696B004A4A5F /* PROJECT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PROJECT.md; sourceTree = "<group>"; };
+		0C7443612F8E696B004A4A5F /* TOOLS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TOOLS.md; sourceTree = "<group>"; };
+		0C7443622F8E696B004A4A5F /* UI-DESIGN.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "UI-DESIGN.md"; sourceTree = "<group>"; };
+		4CC11A472B6A28500012E8EC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8A21B78827EE31A20009E5DB /* TomatoBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomatoBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A21B78B27EE31A20009E5DB /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		8A21B78D27EE31A20009E5DB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -34,7 +55,6 @@
 		8AA5B3F12812A74600BE1A6C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		8AEE49AE2AA75A5E00243D2F /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		C4C8DE0E2930DBB4003B1110 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		4CC11A472B6A28500012E8EC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +71,75 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C7443532F8E5DAA004A4A5F /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				0C7443542F8E696B004A4A5F /* diagrams */,
+				0C7443552F8E696B004A4A5F /* source_documents */,
+				0C7443562F8E696B004A4A5F /* user_guides */,
+				0C7443632F8E696B004A4A5F /* vault */,
+			);
+			path = Documents;
+			sourceTree = "<group>";
+		};
+		0C7443542F8E696B004A4A5F /* diagrams */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = diagrams;
+			sourceTree = "<group>";
+		};
+		0C7443552F8E696B004A4A5F /* source_documents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = source_documents;
+			sourceTree = "<group>";
+		};
+		0C7443562F8E696B004A4A5F /* user_guides */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = user_guides;
+			sourceTree = "<group>";
+		};
+		0C7443592F8E696B004A4A5F /* .obsidian */ = {
+			isa = PBXGroup;
+			children = (
+				0C7443572F8E696B004A4A5F /* app.json */,
+				0C7443582F8E696B004A4A5F /* workspace.json */,
+			);
+			path = .obsidian;
+			sourceTree = "<group>";
+		};
+		0C74435A2F8E696B004A4A5F /* attachments */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = attachments;
+			sourceTree = "<group>";
+		};
+		0C7443632F8E696B004A4A5F /* vault */ = {
+			isa = PBXGroup;
+			children = (
+				0C7443592F8E696B004A4A5F /* .obsidian */,
+				0C74435A2F8E696B004A4A5F /* attachments */,
+				0C74435B2F8E696B004A4A5F /* ARCHITECTURE.md */,
+				0C74435C2F8E696B004A4A5F /* DECISIONS.md */,
+				0C74435D2F8E696B004A4A5F /* DOMAIN.md */,
+				0C74435E2F8E696B004A4A5F /* LEGAL.md */,
+				0C74435F2F8E696B004A4A5F /* LOGGING.md */,
+				0C7443602F8E696B004A4A5F /* PROJECT.md */,
+				0C7443612F8E696B004A4A5F /* TOOLS.md */,
+				0C7443622F8E696B004A4A5F /* UI-DESIGN.md */,
+			);
+			path = vault;
+			sourceTree = "<group>";
+		};
 		8A21B77F27EE31A20009E5DB = {
 			isa = PBXGroup;
 			children = (
+				0C7443532F8E5DAA004A4A5F /* Documents */,
 				8A21B78A27EE31A20009E5DB /* TomatoBar */,
 				8A21B78927EE31A20009E5DB /* Products */,
 				8A9F700D27EE3AED0012A1EC /* Frameworks */,
@@ -163,6 +249,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C7443642F8E696B004A4A5F /* UI-DESIGN.md in Resources */,
+				0C7443652F8E696B004A4A5F /* ARCHITECTURE.md in Resources */,
+				0C7443662F8E696B004A4A5F /* TOOLS.md in Resources */,
+				0C7443672F8E696B004A4A5F /* workspace.json in Resources */,
+				0C7443682F8E696B004A4A5F /* LEGAL.md in Resources */,
+				0C7443692F8E696B004A4A5F /* LOGGING.md in Resources */,
+				0C74436A2F8E696B004A4A5F /* DOMAIN.md in Resources */,
+				0C74436B2F8E696B004A4A5F /* PROJECT.md in Resources */,
+				0C74436C2F8E696B004A4A5F /* app.json in Resources */,
+				0C74436D2F8E696B004A4A5F /* DECISIONS.md in Resources */,
 				8A21B79027EE31A30009E5DB /* Assets.xcassets in Resources */,
 				8AA5434A2930F008002A47FC /* Localizable.strings in Resources */,
 			);
@@ -347,14 +443,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TomatoBar/TomatoBar.entitlements;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7X2XV24BPN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TomatoBar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Veridian;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Ilya Voronin. All rights reserved. https://github.com/ivoronin/TomatoBar";
@@ -363,8 +461,8 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.ivoronin.TomatoBar;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ploutonconsulting.veridian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -382,14 +480,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TomatoBar/TomatoBar.entitlements;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7X2XV24BPN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TomatoBar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Veridian;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Ilya Voronin. All rights reserved. https://github.com/ivoronin/TomatoBar";
@@ -398,8 +498,8 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.ivoronin.TomatoBar;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ploutonconsulting.veridian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
