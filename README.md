@@ -1,45 +1,50 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/ivoronin/TomatoBar/main/TomatoBar/Assets.xcassets/AppIcon.appiconset/icon_128x128%402x.png" width="128" height="128"/>
+<img src="TomatoBar/Assets.xcassets/AppIcon.appiconset/icon_128x128%402x.png" width="128" height="128"/>
 <p>
- 
-<h1 align="center">TomatoBar</h1>
-<p align="center">
-<img src="https://img.shields.io/github/actions/workflow/status/ivoronin/TomatoBar/main.yml?branch=main"/> <img src="https://img.shields.io/github/downloads/ivoronin/TomatoBar/total"/> <img src="https://img.shields.io/github/v/release/ivoronin/TomatoBar?display_name=tag"/> <img src="https://img.shields.io/homebrew/cask/v/tomatobar"/>
-</p>
+
+<h1 align="center">Tiny Tomato Bar</h1>
 
 <img
-  src="https://github.com/ivoronin/TomatoBar/raw/main/screenshot.png?raw=true"
+  src="screenshot.png"
   alt="Screenshot"
   width="50%"
   align="right"
 />
 
 ## Overview
-Have you ever heard of Pomodoro? It’s a great technique to help you keep track of time and stay on task during your studies or work. Read more about it on <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Wikipedia</a>.
 
-TomatoBar is world's neatest Pomodoro timer for the macOS menu bar. All the essential features are here - configurable
-work and rest intervals, optional sounds, discreet actionable notifications, global hotkey.
+A neat Pomodoro timer for the macOS menu bar. Configurable work and rest intervals, system sounds, discreet actionable notifications, and a global hotkey.
 
-TomatoBar is fully sandboxed with no entitlements.
+Available on the [Mac App Store](https://apps.apple.com/app/id6762198642).
 
-Download the latest release <a href="https://github.com/ivoronin/TomatoBar/releases/latest/">here</a> or install using Homebrew:
-```
-$ brew install --cask tomatobar
-```
+Fully sandboxed with no entitlements.
 
-If the app doesn't start, install using the `--no-quarantine` flag:
-```
-$ brew install --cask --no-quarantine tomatobar
-```
+## Features
 
-## Integration with other tools
+- Configurable work, short rest, and long rest intervals
+- Auto-start and auto-stop scheduling with per-day control
+- System sound notifications (Purr for windup, Glass for completion)
+- Global keyboard shortcut
+- Localized in English, Korean, and Simplified Chinese
+- Launch at login
+
+## Integration
+
 ### Event log
-TomatoBar logs state transitions in JSON format to `~/Library/Containers/com.github.ivoronin.TomatoBar/Data/Library/Caches/TomatoBar.log`. Use this data to analyze your productivity and enrich other data sources.
-### Starting and stopping the timer
-TomatoBar can be controlled using `tomatobar://` URLs. To start or stop the timer from the command line, use `open tomatobar://startStop`.
 
-## Older versions
-Touch bar integration and older macOS versions (earlier than Big Sur) are supported by TomatoBar versions prior to 3.0
+Tiny Tomato Bar logs state transitions in JSON format to `~/Library/Containers/com.ploutonconsulting.veridian/Data/Library/Caches/TomatoBar.log`.
 
-## Licenses
- - Timer sounds are licensed from buddhabeats
+### URL scheme
+
+Control the timer via `veridian://` URLs:
+```
+open veridian://startStop
+```
+
+## Attribution
+
+Based on [TomatoBar](https://github.com/ivoronin/TomatoBar) by Ilya Voronin, licensed under the [MIT License](LICENSE).
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details.
