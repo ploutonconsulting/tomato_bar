@@ -13,9 +13,6 @@
 "SettingsView.autoStartTime.label" = "开始时间";
 "SettingsView.autoStopEnabled.label" = "自动停止";
 "SettingsView.autoStopTime.label" = "停止时间";
-"SettingsView.lunchPauseEnabled.label" = "午休暂停";
-"SettingsView.lunchStartTime.label" = "午休开始";
-"SettingsView.lunchDuration.label" = "午休时长:";
 "SoundsView.isWindupEnabled.label" = "发条声";
 "SoundsView.isDingEnabled.label" = "叮";
 "SoundsView.isTickingEnabled.label" = "滴答声";

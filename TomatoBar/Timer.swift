@@ -1,61 +1,6 @@
-// NOTE: TBTimer has accumulated scheduling, notification, URL handling,
-// keyboard shortcut, state machine setup and timer lifecycle
-// responsibilities. A dedicated SRP refactor pass should extract
-// TBScheduleRule and TBLunchWindow to a new Scheduling.swift file and
-// split scheduling / lifecycle methods into extensions to bring the
-// class under the SwiftLint type_body_length threshold. Until that
-// refactor lands, suppress the two length rules for this file only.
-// swiftlint:disable file_length type_body_length
-
 import KeyboardShortcuts
 import SwiftState
 import SwiftUI
-
-/// A recurring lunch window expressed as minutes-since-midnight plus a
-/// duration. Purely declarative — knows nothing about `TBTimer` state.
-/// Sibling of `TBScheduleRule`: rules fire *at* a moment, windows
-/// suppress actions *throughout* an interval.
-struct TBLunchWindow {
-    let enabled: Bool
-    /// Start of the lunch window, minutes since midnight (0–1439).
-    let startMinutesSinceMidnight: Int
-    /// How long the pause lasts, in minutes. Kept separate from the
-    /// start time so the settings UI can use a simple integer stepper
-    /// rather than a second time picker.
-    let durationMinutes: Int
-    /// Bitmask of days the pause applies to. Reuses the auto-start
-    /// bitmask so lunch can't drift away from the work-day schedule.
-    let daysBitmask: Int
-
-    /// Returns true when `now` falls on an allowed weekday and is
-    /// within `[start, start + duration)`.
-    func contains(now: Date, calendar: Calendar = .current) -> Bool {
-        guard enabled else { return false }
-        let weekday = calendar.component(.weekday, from: now)
-        let dayBit = 1 << (weekday - 1)
-        guard daysBitmask & dayBit != 0 else { return false }
-        let currentMinutes = calendar.component(.hour, from: now) * 60
-            + calendar.component(.minute, from: now)
-        return currentMinutes >= startMinutesSinceMidnight
-            && currentMinutes < startMinutesSinceMidnight + durationMinutes
-    }
-
-    /// The `Date` value for lunch-end on the same calendar day as
-    /// `now`, or nil if the window is disabled or `now`'s weekday is
-    /// not in the bitmask. Used to clear the auto-start dedup flag
-    /// once the lunch window has elapsed.
-    func endDate(onSameDayAs now: Date, calendar: Calendar = .current) -> Date? {
-        guard enabled else { return nil }
-        let weekday = calendar.component(.weekday, from: now)
-        let dayBit = 1 << (weekday - 1)
-        guard daysBitmask & dayBit != 0 else { return nil }
-        let totalMinutes = startMinutesSinceMidnight + durationMinutes
-        var components = calendar.dateComponents([.year, .month, .day], from: now)
-        components.hour = totalMinutes / 60
-        components.minute = totalMinutes % 60
-        return calendar.date(from: components)
-    }
-}
 
 /// A pure value type that decides whether a scheduled action (auto-start or
 /// auto-stop) should fire "now". Kept free of `TBTimer` state so the same
@@ -103,11 +48,6 @@ class TBTimer: ObservableObject {
     @AppStorage("autoStopMinutesSinceMidnight") var autoStopMinutesSinceMidnight = 1020
     // Same bitmask layout as autoStartDays. Default Mon–Fri.
     @AppStorage("autoStopDays") var autoStopDays = 0b0111110
-    @AppStorage("lunchPauseEnabled") var lunchPauseEnabled = false
-    // Minutes since midnight, default 720 = 12:00 PM
-    @AppStorage("lunchStartMinutesSinceMidnight") var lunchStartMinutesSinceMidnight = 720
-    // Lunch duration in minutes, default 60
-    @AppStorage("lunchDurationMinutes") var lunchDurationMinutes = 60
 
     private var stateMachine = TBStateMachine(state: .idle)
     public let player = TBPlayer()
@@ -132,21 +72,6 @@ class TBTimer: ObservableObject {
     var autoStopTime: Date {
         get { Self.date(fromMinutes: autoStopMinutesSinceMidnight) }
         set { autoStopMinutesSinceMidnight = Self.minutes(from: newValue, defaultHour: 17) }
-    }
-
-    /// DatePicker binding for the lunch start time-of-day.
-    var lunchStartTime: Date {
-        get { Self.date(fromMinutes: lunchStartMinutesSinceMidnight) }
-        set { lunchStartMinutesSinceMidnight = Self.minutes(from: newValue, defaultHour: 12) }
-    }
-
-    private var lunchWindow: TBLunchWindow {
-        TBLunchWindow(
-            enabled: lunchPauseEnabled,
-            startMinutesSinceMidnight: lunchStartMinutesSinceMidnight,
-            durationMinutes: lunchDurationMinutes,
-            daysBitmask: autoStartDays
-        )
     }
 
     private var startRule: TBScheduleRule {
@@ -209,10 +134,10 @@ class TBTimer: ObservableObject {
         ])
         stateMachine.addRoutes(event: .timerFired, transitions: [.work => .rest])
         stateMachine.addRoutes(event: .timerFired, transitions: [.rest => .idle]) { _ in
-            self.stopAfterBreak || self.lunchWindow.contains(now: Date())
+            self.stopAfterBreak
         }
         stateMachine.addRoutes(event: .timerFired, transitions: [.rest => .work]) { _ in
-            !self.stopAfterBreak && !self.lunchWindow.contains(now: Date())
+            !self.stopAfterBreak
         }
         stateMachine.addRoutes(event: .skipRest, transitions: [.rest => .work])
 
@@ -399,28 +324,15 @@ class TBTimer: ObservableObject {
         }
     }
 
-    /// Consults `startRule`, `stopRule`, and `lunchWindow`. Auto-start
-    /// and auto-stop each fire at most once per day; auto-start is
-    /// additionally suppressed inside the lunch window and re-eligible
-    /// after it ends (see the dedup-reset step below).
+    /// Consults `startRule` and `stopRule`. Auto-start and auto-stop
+    /// each fire at most once per day.
     private func checkSchedule() {
         let now = Date()
         let calendar = Calendar.current
 
-        // Dedup reset: if auto-start already fired this morning and the
-        // clock has now passed today's lunch-end, clear the flag so
-        // auto-start is eligible to re-fire after lunch.
-        if let last = lastAutoStartDate,
-           let lunchEnd = lunchWindow.endDate(onSameDayAs: now, calendar: calendar),
-           last < lunchEnd, now >= lunchEnd {
-            lastAutoStartDate = nil
-        }
-
-        // Auto-start: once per day (or twice if lunch reset the flag),
-        // only while idle, and never inside the lunch window itself.
+        // Auto-start: once per day, only while idle.
         if !isSameDayAsNow(lastAutoStartDate, calendar: calendar, now: now),
            stateMachine.state == .idle,
-           !lunchWindow.contains(now: now, calendar: calendar),
            startRule.shouldFire(now: now, calendar: calendar) {
             lastAutoStartDate = now
             startStop()
@@ -443,5 +355,3 @@ class TBTimer: ObservableObject {
         return calendar.isDate(date, inSameDayAs: now)
     }
 }
-
-// swiftlint:enable file_length type_body_length

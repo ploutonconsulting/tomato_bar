@@ -149,32 +149,6 @@ private struct SettingsView: View {
                     displayedComponents: .hourAndMinute
                 )
             }
-            Toggle(isOn: $timer.lunchPauseEnabled) {
-                Text(NSLocalizedString("SettingsView.lunchPauseEnabled.label",
-                                       comment: "Pause for lunch label"))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }.toggleStyle(.switch)
-            if timer.lunchPauseEnabled {
-                DatePicker(
-                    NSLocalizedString("SettingsView.lunchStartTime.label",
-                                      comment: "Lunch start time label"),
-                    selection: Binding(
-                        get: { timer.lunchStartTime },
-                        set: { timer.lunchStartTime = $0 }
-                    ),
-                    displayedComponents: .hourAndMinute
-                )
-                Stepper(value: $timer.lunchDurationMinutes, in: 15 ... 180, step: 5) {
-                    HStack {
-                        Text(NSLocalizedString("SettingsView.lunchDuration.label",
-                                               comment: "Lunch duration label"))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        Text(String.localizedStringWithFormat(
-                            NSLocalizedString("IntervalsView.min", comment: "min"),
-                            timer.lunchDurationMinutes))
-                    }
-                }
-            }
             Spacer().frame(minHeight: 0)
         }
         .padding(4)

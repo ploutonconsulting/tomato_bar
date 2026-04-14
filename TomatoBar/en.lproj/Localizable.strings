@@ -13,9 +13,6 @@
 "SettingsView.autoStartTime.label" = "Start time";
 "SettingsView.autoStopEnabled.label" = "Auto-stop";
 "SettingsView.autoStopTime.label" = "Stop time";
-"SettingsView.lunchPauseEnabled.label" = "Pause for lunch";
-"SettingsView.lunchStartTime.label" = "Lunch start";
-"SettingsView.lunchDuration.label" = "Lunch duration:";
 "SoundsView.isWindupEnabled.label" = "Windup";
 "SoundsView.isDingEnabled.label" = "Ding";
 "SoundsView.isTickingEnabled.label" = "Ticking";
