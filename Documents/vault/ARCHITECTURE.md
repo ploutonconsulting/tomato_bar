@@ -1,6 +1,6 @@
 ---
 title: TomatoBar — Architecture
-version: 1.0
+version: 1.1
 created: 2026-04-14
 updated: 2026-04-14
 tags:
@@ -46,6 +46,9 @@ macOS notification dispatch for timer state transitions.
 
 ### Logging (Log.swift)
 Structured event logging.
+
+### Tests (TomatoBarTests/)
+Unit tests using Swift Testing framework. Covers `TBScheduleRule` (weekday bitmask, time-of-day matching), log event encoding, and notification enum raw values. `TBTimer` is not directly testable yet due to AppKit singleton coupling in `init()`.
 
 ## Data Models
 

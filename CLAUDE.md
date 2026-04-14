@@ -8,6 +8,9 @@ macOS menu-bar Pomodoro timer (SwiftUI + AppKit), distributed on the Mac App Sto
 # Build
 xcodebuild build -scheme TomatoBar -configuration Debug -destination 'platform=macOS'
 
+# Test
+xcodebuild test -scheme TomatoBar -destination 'platform=macOS' -only-testing TomatoBarTests
+
 # Lint (autofix)
 swiftlint --fix TomatoBar/
 
@@ -24,6 +27,7 @@ swiftlint lint TomatoBar/
 - `TomatoBar/Log.swift` — Structured event logging (`TBLogEvent` protocol)
 - `TomatoBar/Player.swift` — Sound playback (`TBPlayer`)
 - `TomatoBar/Notifications.swift` — macOS notification dispatch (`TBNotificationCenter`)
+- `TomatoBarTests/TomatoBarTests.swift` — Unit tests (Swift Testing framework)
 
 ## Code Style
 
@@ -38,7 +42,7 @@ swiftlint lint TomatoBar/
 
 ## Gotchas
 
-- **No test target.** SwiftLint + xcodebuild are the only automated safety nets.
+- **Test target.** `TomatoBarTests` uses Swift Testing. Tests cover `TBScheduleRule`, log encoding, and notification enums. `TBTimer` is not directly testable yet (coupled to AppKit singletons in `init()`).
 - **Localization sync.** Three locales (`en`, `ko`, `zh-Hans`) must stay in sync. Every key in `en.lproj/Localizable.strings` must exist in `ko.lproj` and `zh-Hans.lproj`.
 - **SwiftLint config.** `.swiftlint.yml` disables `trailing_comma` and `opening_brace`. Don't re-enable or pass `--config`.
 - **Never edit these files:** `TomatoBar.xcodeproj/project.pbxproj`, `TomatoBar.entitlements`, `export_options.plist` — signing-critical.

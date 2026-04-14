@@ -1,6 +1,6 @@
 ---
 title: TomatoBar — Tools
-version: 1.1
+version: 1.2
 created: 2026-04-14
 updated: 2026-04-14
 tags:
@@ -34,6 +34,13 @@ tags:
 |------|---------|---------|
 | SwiftLint autofix | PostToolUse (Edit/Write on .swift) | Auto-fix lint violations on save |
 | Localization sync warning | PostToolUse (Edit/Write on .strings) | Remind to sync all 3 locales |
+
+## Testing
+
+- **Framework:** Swift Testing (`import Testing`)
+- **Target:** `TomatoBarTests`
+- **Run:** `xcodebuild test -scheme TomatoBar -destination 'platform=macOS' -only-testing TomatoBarTests`
+- **Coverage:** `TBScheduleRule`, log event encoding, notification enums, system sound file existence
 
 ## Build
 
