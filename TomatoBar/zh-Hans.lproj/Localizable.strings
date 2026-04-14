@@ -15,7 +15,6 @@
 "SettingsView.autoStopTime.label" = "停止时间";
 "SoundsView.isWindupEnabled.label" = "发条声";
 "SoundsView.isDingEnabled.label" = "叮";
-"SoundsView.isTickingEnabled.label" = "滴答声";
 "TBPopoverView.start.label" = "开始";
 "TBPopoverView.stop.label" = "停止";
 "TBPopoverView.intervals.label" = "时长";

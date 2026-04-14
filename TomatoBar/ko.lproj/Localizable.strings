@@ -15,7 +15,6 @@
 "SettingsView.autoStopTime.label" = "중지 시간";
 "SoundsView.isWindupEnabled.label" = "Windup";
 "SoundsView.isDingEnabled.label" = "Ding";
-"SoundsView.isTickingEnabled.label" = "Ticking";
 "TBPopoverView.start.label" = "시작";
 "TBPopoverView.stop.label" = "중지";
 "TBPopoverView.intervals.label" = "간격";
