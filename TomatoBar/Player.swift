@@ -21,8 +21,8 @@ class TBPlayer: ObservableObject {
     }
 
     init() {
-        reloadStartSound()
-        reloadEndSound()
+        startSoundID = Self.loadSystemSound(startSoundName)
+        endSoundID = Self.loadSystemSound(endSoundName)
     }
 
     deinit {
@@ -43,11 +43,13 @@ class TBPlayer: ObservableObject {
     private func reloadStartSound() {
         if startSoundID != 0 { AudioServicesDisposeSystemSoundID(startSoundID) }
         startSoundID = Self.loadSystemSound(startSoundName)
+        AudioServicesPlaySystemSound(startSoundID)
     }
 
     private func reloadEndSound() {
         if endSoundID != 0 { AudioServicesDisposeSystemSoundID(endSoundID) }
         endSoundID = Self.loadSystemSound(endSoundName)
+        AudioServicesPlaySystemSound(endSoundID)
     }
 
     /// Loads a system sound file into an AudioToolbox SystemSoundID.
