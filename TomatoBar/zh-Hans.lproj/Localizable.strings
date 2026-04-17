@@ -24,6 +24,11 @@
 "TBPopoverView.sounds.label" = "声音";
 "TBPopoverView.about.label" = "关于";
 "TBPopoverView.quit.label" = "退出";
+"SoundsView.useCustomVolume.label" = "自定义音量";
+"SoundsView.customVolumeLevel.label" = "音量";
+"SettingsView.notificationsEnabled.label" = "显示通知";
+"TBTimer.onWorkStart.title" = "工作开始";
+"TBTimer.onWorkStart.body" = "保持专注！";
 "TBTimer.onRestStart.title" = "时间到";
 "TBTimer.onRestStart.short.body" = "小憩时间到!";
 "TBTimer.onRestStart.long.body" = "长休息时间到!";

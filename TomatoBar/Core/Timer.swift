@@ -52,7 +52,10 @@ class TBTimer: ObservableObject {
     private var stateMachine = TBStateMachine(state: .idle)
     public let player = TBPlayer()
     private var consecutiveWorkIntervals: Int = 0
-    private var notificationCenter = TBNotificationCenter()
+    @AppStorage("notificationsEnabled") var notificationsEnabled = true {
+        didSet { notificationCenter.notificationsEnabled = notificationsEnabled }
+    }
+    private let notificationCenter = TBNotificationCenter()
     private var finishTime: Date!
     private var timerFormatter = DateComponentsFormatter()
     private var scheduleTimer: Timer?
@@ -178,10 +181,9 @@ class TBTimer: ObservableObject {
             print("url handling error: cannot get url")
             return
         }
-        let url = URL(string: urlString)
-        guard url != nil,
-              let scheme = url!.scheme,
-              let host = url!.host else {
+        guard let url = URL(string: urlString),
+              let scheme = url.scheme,
+              let host = url.host else {
             print("url handling error: cannot parse url")
             return
         }
@@ -265,6 +267,11 @@ class TBTimer: ObservableObject {
     private func onWorkStart(context _: TBStateMachine.Context) {
         TBStatusItem.shared.setIcon(name: .work)
         player.playStart()
+        notificationCenter.send(
+            title: NSLocalizedString("TBTimer.onWorkStart.title", comment: "Work started title"),
+            body: NSLocalizedString("TBTimer.onWorkStart.body", comment: "Work started body"),
+            category: .workStarted
+        )
         startTimer(seconds: workIntervalLength * 60)
     }
 
