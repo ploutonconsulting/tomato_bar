@@ -1,3 +1,4 @@
+import AppKit
 @testable import TomatoBar
 import Testing
 import Foundation
@@ -176,6 +177,7 @@ struct LogEventEncodingTests {
 struct NotificationEnumTests {
     /// Category raw values match what UNNotificationCategory expects.
     @Test func categoryRawValues() {
+        #expect(TBNotification.Category.workStarted.rawValue == "workStarted")
         #expect(TBNotification.Category.restStarted.rawValue == "restStarted")
         #expect(TBNotification.Category.restFinished.rawValue == "restFinished")
     }
@@ -195,6 +197,15 @@ struct SystemSoundTests {
             let path = "/System/Library/Sounds/\(name).aiff"
             #expect(FileManager.default.fileExists(atPath: path),
                     "Missing system sound: \(name)")
+        }
+    }
+
+    /// All declared system sounds load as NSSound instances.
+    @Test func allSystemSoundsLoadAsNSSound() {
+        for name in systemSoundNames {
+            let url = URL(fileURLWithPath: "/System/Library/Sounds/\(name).aiff")
+            let sound = NSSound(contentsOf: url, byReference: true)
+            #expect(sound != nil, "Failed to load NSSound: \(name)")
         }
     }
 }

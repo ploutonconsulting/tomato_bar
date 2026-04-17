@@ -24,6 +24,11 @@
 "TBPopoverView.sounds.label" = "Sounds";
 "TBPopoverView.about.label" = "About";
 "TBPopoverView.quit.label" = "Quit";
+"SoundsView.useCustomVolume.label" = "Custom volume";
+"SoundsView.customVolumeLevel.label" = "Volume";
+"SettingsView.notificationsEnabled.label" = "Show notifications";
+"TBTimer.onWorkStart.title" = "Work started";
+"TBTimer.onWorkStart.body" = "Stay focused!";
 "TBTimer.onRestStart.title" = "Time's up";
 "TBTimer.onRestStart.short.body" = "It's time for a short break!";
 "TBTimer.onRestStart.long.body" = "It's time for a long break!";

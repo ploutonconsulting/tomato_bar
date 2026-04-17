@@ -108,6 +108,11 @@ private struct SettingsView: View {
                 .onChange(of: timer.showTimerInMenuBar) { _ in
                     timer.updateTimeLeft()
                 }
+            Toggle(isOn: $timer.notificationsEnabled) {
+                Text(NSLocalizedString("SettingsView.notificationsEnabled.label",
+                                       comment: "Show notifications label"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }.toggleStyle(.switch)
             LaunchAtLogin.Toggle {
                 Text(NSLocalizedString("SettingsView.launchAtLogin.label",
                                        comment: "Launch at login label"))
@@ -183,6 +188,20 @@ private struct SoundsView: View {
                        selection: $player.endSoundName) {
                     ForEach(systemSoundNames, id: \.self) { name in
                         Text(name).tag(name)
+                    }
+                }
+            }
+            Toggle(isOn: $player.useCustomVolume) {
+                Text(NSLocalizedString("SoundsView.useCustomVolume.label",
+                                       comment: "Custom volume label"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }.toggleStyle(.switch)
+            if player.useCustomVolume {
+                HStack {
+                    Text(NSLocalizedString("SoundsView.customVolumeLevel.label",
+                                           comment: "Volume label"))
+                    Slider(value: $player.customVolumeLevel, in: 0.0 ... 1.0) { editing in
+                        if !editing { player.playStart() }
                     }
                 }
             }

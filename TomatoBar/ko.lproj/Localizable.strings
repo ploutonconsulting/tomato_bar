@@ -24,6 +24,11 @@
 "TBPopoverView.sounds.label" = "사운드";
 "TBPopoverView.about.label" = "앱 정보";
 "TBPopoverView.quit.label" = "종료";
+"SoundsView.useCustomVolume.label" = "사용자 지정 음량";
+"SoundsView.customVolumeLevel.label" = "음량";
+"SettingsView.notificationsEnabled.label" = "알림 표시";
+"TBTimer.onWorkStart.title" = "작업 시작";
+"TBTimer.onWorkStart.body" = "집중하세요!";
 "TBTimer.onRestStart.title" = "시간 종료";
 "TBTimer.onRestStart.short.body" = "짧은 휴식을 취할 시간입니다!";
 "TBTimer.onRestStart.long.body" = "긴 휴식을 취할 시간입니다!";

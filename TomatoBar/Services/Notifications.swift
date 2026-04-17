@@ -2,7 +2,7 @@ import UserNotifications
 
 enum TBNotification {
     enum Category: String {
-        case restStarted, restFinished
+        case workStarted, restStarted, restFinished
     }
 
     enum Action: String {
@@ -16,14 +16,18 @@ class TBNotificationCenter: NSObject, UNUserNotificationCenterDelegate {
     private var center = UNUserNotificationCenter.current()
     private var handler: TBNotificationHandler?
 
+    /// Whether notifications are currently enabled. Set by TBTimer's
+    /// @AppStorage property and checked before each send.
+    var notificationsEnabled = true
+
     override init() {
         super.init()
 
         center.requestAuthorization(
             options: [.alert]
         ) { _, error in
-            if error != nil {
-                print("Error requesting notification authorization: \(error!)")
+            if let error {
+                print("Error requesting notification authorization: \(error)")
             }
         }
 
@@ -33,6 +37,11 @@ class TBNotificationCenter: NSObject, UNUserNotificationCenterDelegate {
             identifier: TBNotification.Action.skipRest.rawValue,
             title: NSLocalizedString("TBTimer.onRestStart.skip.title", comment: "Skip"),
             options: []
+        )
+        let workStartedCategory = UNNotificationCategory(
+            identifier: TBNotification.Category.workStarted.rawValue,
+            actions: [],
+            intentIdentifiers: []
         )
         let restStartedCategory = UNNotificationCategory(
             identifier: TBNotification.Category.restStarted.rawValue,
@@ -46,6 +55,7 @@ class TBNotificationCenter: NSObject, UNUserNotificationCenterDelegate {
         )
 
         center.setNotificationCategories([
+            workStartedCategory,
             restStartedCategory,
             restFinishedCategory,
         ])
@@ -59,14 +69,13 @@ class TBNotificationCenter: NSObject, UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler _: @escaping () -> Void)
     {
-        if handler != nil {
-            if let action = TBNotification.Action(rawValue: response.actionIdentifier) {
-                handler!(action)
-            }
+        if let action = TBNotification.Action(rawValue: response.actionIdentifier) {
+            handler?(action)
         }
     }
 
     func send(title: String, body: String, category: TBNotification.Category) {
+        guard notificationsEnabled else { return }
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
@@ -77,8 +86,8 @@ class TBNotificationCenter: NSObject, UNUserNotificationCenterDelegate {
             trigger: nil
         )
         center.add(request) { error in
-            if error != nil {
-                print("Error adding notification: \(error!)")
+            if let error {
+                print("Error adding notification: \(error)")
             }
         }
     }
