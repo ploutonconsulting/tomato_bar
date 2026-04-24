@@ -3,3 +3,6 @@ xcuserdata
 /Build
 .claude/settings.json
 .claude/settings.local.json
+/.claude
+.mcp.json
+TomatoBar/.claude/commands/review-code.md
