@@ -19,8 +19,12 @@
 		0C74436D2F8E696B004A4A5F /* DECISIONS.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C74435C2F8E696B004A4A5F /* DECISIONS.md */; };
 		0C74437D2F8E7D5C004A4A5F /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 0C74437C2F8E7D5C004A4A5F /* LaunchAtLogin */; };
 		0C74437F2F8E7F85004A4A5F /* APP-STORE-LISTING.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C74437E2F8E7F85004A4A5F /* APP-STORE-LISTING.md */; };
+		0C9F9B422F9B7ED700A95EB1 /* TBPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9F9B412F9B7ED700A95EB1 /* TBPopoverView.swift */; };
+		0C9F9B442F9B7EE500A95EB1 /* SoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9F9B432F9B7EE500A95EB1 /* SoundsView.swift */; };
+		0C9F9B462F9B7EF200A95EB1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9F9B452F9B7EF200A95EB1 /* SettingsView.swift */; };
+		0C9F9B482F9B7EFF00A95EB1 /* DayPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9F9B472F9B7EFF00A95EB1 /* DayPickerView.swift */; };
 		8A21B78C27EE31A20009E5DB /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78B27EE31A20009E5DB /* App.swift */; };
-		8A21B78E27EE31A20009E5DB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78D27EE31A20009E5DB /* View.swift */; };
+		8A21B78E27EE31A20009E5DB /* IntervalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B78D27EE31A20009E5DB /* IntervalsView.swift */; };
 		8A21B79027EE31A30009E5DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A21B78F27EE31A30009E5DB /* Assets.xcassets */; };
 		8A8CFE402821D8C300F9F303 /* SwiftState in Frameworks */ = {isa = PBXBuildFile; productRef = 8A8CFE3F2821D8C300F9F303 /* SwiftState */; };
 		8A9F700927EE396E0012A1EC /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9F700827EE396E0012A1EC /* State.swift */; };
@@ -55,10 +59,14 @@
 		0C7443622F8E696B004A4A5F /* UI-DESIGN.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "UI-DESIGN.md"; sourceTree = "<group>"; };
 		0C7443722F8E784A004A4A5F /* TomatoBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomatoBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C74437E2F8E7F85004A4A5F /* APP-STORE-LISTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "APP-STORE-LISTING.md"; sourceTree = "<group>"; };
+		0C9F9B412F9B7ED700A95EB1 /* TBPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBPopoverView.swift; sourceTree = "<group>"; };
+		0C9F9B432F9B7EE500A95EB1 /* SoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsView.swift; sourceTree = "<group>"; };
+		0C9F9B452F9B7EF200A95EB1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0C9F9B472F9B7EFF00A95EB1 /* DayPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPickerView.swift; sourceTree = "<group>"; };
 		4CC11A472B6A28500012E8EC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8A21B78827EE31A20009E5DB /* TomatoBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TomatoBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A21B78B27EE31A20009E5DB /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		8A21B78D27EE31A20009E5DB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		8A21B78D27EE31A20009E5DB /* IntervalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalsView.swift; sourceTree = "<group>"; };
 		8A21B78F27EE31A30009E5DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A21B79427EE31A30009E5DB /* TomatoBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TomatoBar.entitlements; sourceTree = "<group>"; };
 		8A9F700827EE396E0012A1EC /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -161,18 +169,10 @@
 			path = .obsidian;
 			sourceTree = "<group>";
 		};
-		0C74435A2F8E696B004A4A5F /* attachments */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = attachments;
-			sourceTree = "<group>";
-		};
 		0C7443632F8E696B004A4A5F /* vault */ = {
 			isa = PBXGroup;
 			children = (
 				0C7443592F8E696B004A4A5F /* .obsidian */,
-				0C74435A2F8E696B004A4A5F /* attachments */,
 				0C74435B2F8E696B004A4A5F /* ARCHITECTURE.md */,
 				0C74435C2F8E696B004A4A5F /* DECISIONS.md */,
 				0C74435D2F8E696B004A4A5F /* DOMAIN.md */,
@@ -184,6 +184,18 @@
 				0C74437E2F8E7F85004A4A5F /* APP-STORE-LISTING.md */,
 			);
 			path = vault;
+			sourceTree = "<group>";
+		};
+		0C9F9B492F9B7F4D00A95EB1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8A21B78D27EE31A20009E5DB /* IntervalsView.swift */,
+				0C9F9B472F9B7EFF00A95EB1 /* DayPickerView.swift */,
+				0C9F9B452F9B7EF200A95EB1 /* SettingsView.swift */,
+				0C9F9B432F9B7EE500A95EB1 /* SoundsView.swift */,
+				0C9F9B412F9B7ED700A95EB1 /* TBPopoverView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		8A21B77F27EE31A20009E5DB = {
@@ -212,8 +224,8 @@
 				0C05A6E02F923D11005BB993 /* Core */,
 				0C05A6E12F923D28005BB993 /* Services */,
 				0C05A6DF2F922700005BB993 /* Utilities */,
+				0C9F9B492F9B7F4D00A95EB1 /* Views */,
 				8A21B78B27EE31A20009E5DB /* App.swift */,
-				8A21B78D27EE31A20009E5DB /* View.swift */,
 				8A9F700827EE396E0012A1EC /* State.swift */,
 				8A21B78F27EE31A30009E5DB /* Assets.xcassets */,
 				8A21B79427EE31A30009E5DB /* TomatoBar.entitlements */,
@@ -366,10 +378,14 @@
 			files = (
 				8A9F701F27EE536D0012A1EC /* Player.swift in Sources */,
 				8AEE49AF2AA75A5E00243D2F /* Log.swift in Sources */,
-				8A21B78E27EE31A20009E5DB /* View.swift in Sources */,
+				0C9F9B482F9B7EFF00A95EB1 /* DayPickerView.swift in Sources */,
+				0C9F9B422F9B7ED700A95EB1 /* TBPopoverView.swift in Sources */,
+				8A21B78E27EE31A20009E5DB /* IntervalsView.swift in Sources */,
 				8A9F701927EE3DAF0012A1EC /* Timer.swift in Sources */,
+				0C9F9B462F9B7EF200A95EB1 /* SettingsView.swift in Sources */,
 				8A21B78C27EE31A20009E5DB /* App.swift in Sources */,
 				8AA5B3F22812A74600BE1A6C /* Notifications.swift in Sources */,
+				0C9F9B442F9B7EE500A95EB1 /* SoundsView.swift in Sources */,
 				8A9F700927EE396E0012A1EC /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
